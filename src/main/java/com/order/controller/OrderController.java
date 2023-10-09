@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +23,7 @@ public class OrderController {
     private OrderServices orderServices;
 
 
-    @PostMapping
+    @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
     @Operation(summary = "Cria um pedido")
     @ApiResponse(responseCode = "201", description = "Pedido Criado")
@@ -33,7 +34,7 @@ public class OrderController {
     }
 
 
-    @GetMapping(value = "/")
+    @GetMapping(value = "/", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     @Operation(summary = "Lista todos os pedido")
     @ApiResponse(responseCode = "200", description = "Encontrado Pedido")
     @ApiResponse(responseCode = "404", description = "Nao ha nenhum pedido ")
@@ -47,7 +48,7 @@ public class OrderController {
        }
     }
 
-    @GetMapping(value = "/{id}" )
+    @GetMapping(value = "/{id}",consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE} )
     @Operation(summary = "Lista o pedido de acordo com o ID informado")
     @ApiResponse(responseCode =  "200", description = "Pedido encontrado")
     @ApiResponse(responseCode = "404", description = "Pedido com ID nao encontrado")
@@ -58,7 +59,7 @@ public class OrderController {
          }
          return ResponseEntity.status(HttpStatus.FOUND).body(orders);
     }
-    @GetMapping(value = "/clients/{codCliente}" )
+    @GetMapping(value = "/clients/{codCliente}",consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE} )
     @Operation(summary = "Lista o pedido de acordo com o ID de cliente informado")
     @ApiResponse(responseCode =  "200", description = "Pedido encontrado")
     @ApiResponse(responseCode = "404", description = "Pedido com ID nao encontrado")
@@ -70,7 +71,7 @@ public class OrderController {
         return ResponseEntity.status(HttpStatus.FOUND).body(orders);
     }
 
-    @PutMapping(value = "/{codPedido}" )
+    @PutMapping(value = "/{codPedido}" ,consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     @Operation(summary = "Cancela o pedido de acordo com o ID de pedido informado")
     @ApiResponse(responseCode =  "200", description = "Pedido encontrado")
     @ApiResponse(responseCode = "404", description = "Pedido com ID nao encontrado")

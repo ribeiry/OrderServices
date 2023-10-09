@@ -12,5 +12,6 @@ public class OrderApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(OrderApplication.class, args);
 	}
-
+	//TODO REFACTORING README
+	//TODO MAKE TESTS
 }

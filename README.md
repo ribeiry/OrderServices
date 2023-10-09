@@ -1,6 +1,6 @@
 # Order Services 
 
-Um parágrafo da descrição do projeto vai aqui
+Um servico desenvolvido em java 17 com SpringBoot 3.1.3 e com Database H2.
 
 ## 🚀 Começando
 
@@ -10,11 +10,8 @@ Consulte **[Implantação](#-implanta%C3%A7%C3%A3o)** para saber como implantar 
 
 ### 📋 Pré-requisitos
 
-De que coisas você precisa para instalar o software e como instalá-lo?
+Para executar é necessário ter o Maven instalado eo java jdk 17 tambem configurado em sua maquina.
 
-```
-Dar exemplos
-```
 
 ### 🔧 Instalação
 
@@ -96,4 +93,4 @@ Este projeto está sob a licença (sua licença) - veja o arquivo [LICENSE.md](h
 
 
 ---
-⌨️ com ❤️ por [Armstrong Lohãns](https://gist.github.com/lohhans) 😊
+⌨️ com ❤️ por [José Augusto ](https://github.com/ribeiry)
