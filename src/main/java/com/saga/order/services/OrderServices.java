@@ -1,9 +1,9 @@
-package com.order.services;
+package com.saga.order.services;
 
-import com.order.repository.OrderRepository;
-import com.order.model.OrderDTO;
-import com.order.model.OrderMapper;
-import com.order.model.ProdutoDTO;
+import com.saga.order.repository.OrderRepository;
+import com.saga.order.model.OrderDTO;
+import com.saga.order.model.OrderMapper;
+import com.saga.order.model.ProdutoDTO;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +17,7 @@ public class OrderServices {
 
 
     @Autowired
-    private OrderRepository repository;
+    OrderRepository repository;
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 

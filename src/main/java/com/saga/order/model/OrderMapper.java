@@ -1,4 +1,4 @@
-package com.order.model;
+package com.saga.order.model;
 
 import java.util.ArrayList;
 import java.util.List;

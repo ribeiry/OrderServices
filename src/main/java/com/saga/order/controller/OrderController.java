@@ -1,8 +1,8 @@
-package com.order.controller;
+package com.saga.order.controller;
 
-import com.order.exception.OrderNotFoundException;
-import com.order.model.OrderDTO;
-import com.order.services.OrderServices;
+import com.saga.order.exception.OrderNotFoundException;
+import com.saga.order.model.OrderDTO;
+import com.saga.order.services.OrderServices;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 import java.util.UUID;
@@ -36,7 +37,7 @@ public class OrderController {
 
     @GetMapping(value = "/", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     @Operation(summary = "Lista todos os pedido")
-    @ApiResponse(responseCode = "200", description = "Encontrado Pedido")
+    @ApiResponse(responseCode = "302", description = "Encontrado Pedido")
     @ApiResponse(responseCode = "404", description = "Nao ha nenhum pedido ")
     public ResponseEntity<List<OrderDTO>> findAllOrder(){
        List<OrderDTO> order = orderServices.findAll();
@@ -50,7 +51,7 @@ public class OrderController {
 
     @GetMapping(value = "/{id}",consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE} )
     @Operation(summary = "Lista o pedido de acordo com o ID informado")
-    @ApiResponse(responseCode =  "200", description = "Pedido encontrado")
+    @ApiResponse(responseCode =  "302", description = "Pedido encontrado")
     @ApiResponse(responseCode = "404", description = "Pedido com ID nao encontrado")
     public  ResponseEntity<OrderDTO> findaOrder(@PathVariable UUID id) throws OrderNotFoundException {
          OrderDTO orders = orderServices.findOne(id) ;
@@ -61,7 +62,7 @@ public class OrderController {
     }
     @GetMapping(value = "/clients/{codCliente}",consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE} )
     @Operation(summary = "Lista o pedido de acordo com o ID de cliente informado")
-    @ApiResponse(responseCode =  "200", description = "Pedido encontrado")
+    @ApiResponse(responseCode =  "302", description = "Pedido encontrado")
     @ApiResponse(responseCode = "404", description = "Pedido com ID nao encontrado")
     public ResponseEntity<List<OrderDTO>> findaOrderaClient(@PathVariable UUID codCliente) throws OrderNotFoundException {
         List<OrderDTO> orders = orderServices.findbyClient(codCliente);

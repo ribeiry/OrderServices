@@ -1,4 +1,4 @@
-package com.order.model;
+package com.saga.order.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
@@ -10,11 +10,11 @@ public class ProdutoDTO {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID codProduto;
 
-    public com.order.model.OrderDTO getOrderDTO() {
+    public com.saga.order.model.OrderDTO getOrderDTO() {
         return OrderDTO;
     }
 
-    public void setOrderDTO(com.order.model.OrderDTO orderDTO) {
+    public void setOrderDTO(com.saga.order.model.OrderDTO orderDTO) {
         OrderDTO = orderDTO;
     }
 
