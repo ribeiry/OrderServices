@@ -51,6 +51,16 @@ public class OrderControllerTest {
     }
 
     @Test
+    void testGetErrorAllOrders() throws  Exception {
+        List<OrderDTO> pedidos = getListObjectOrder();
+        when(orderServices.findAll()).thenReturn(null);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/orders/")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
+    }
+
+    @Test
     void testGetAOrder() throws Exception{
         OrderDTO orderDTO = getObjectOrder();
 
