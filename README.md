@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Order Services 
 
 Um servico desenvolvido em java 17 com SpringBoot 3.1.3 e com Database H2.
@@ -34,39 +33,26 @@ Termine com um exemplo de como obter dados do sistema ou como usá-los para uma 
 
 ## ⚙️ Executando os testes
 
-Explicar como executar os testes automatizados para este sistema.
+Explicar como executar os testes automatizados para este sistema. Para isso você deve executar o seguinte comando
 
-### 🔩 Analise os testes de ponta a ponta
+``
+mvn test
+``
 
-Explique que eles verificam esses testes e porquê.
-
-```
-Dar exemplos
-```
-
-### ⌨️ E testes de estilo de codificação
-
-Explique que eles verificam esses testes e porquê.
-
-```
-Dar exemplos
-```
 
 ## 📦 Implantação
 
-Adicione notas adicionais sobre como implantar isso em um sistema ativo
+Para rodar basta executar o seguinte comando:
 
+``
+mvn clean install
+``
 ## 🛠️ Construído com
 
 Mencione as ferramentas que você usou para criar seu projeto
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - O framework web usado
+* [SpringBoot](https://spring.io/guides/gs/spring-boot/) - O framework para java
 * [Maven](https://maven.apache.org/) - Gerente de Dependência
-* [ROME](https://rometools.github.io/rome/) - Usada para gerar RSS
-
-## 🖇️ Colaborando
-
-Por favor, leia o [COLABORACAO.md](https://gist.github.com/usuario/linkParaInfoSobreContribuicoes) para obter detalhes sobre o nosso código de conduta e o processo para nos enviar pedidos de solicitação.
 
 ## 📌 Versão
 
@@ -76,14 +62,9 @@ Nós usamos [SemVer](http://semver.org/) para controle de versão. Para as vers�
 
 Mencione todos aqueles que ajudaram a levantar o projeto desde o seu início
 
-* **Um desenvolvedor** - *Trabalho Inicial* - [umdesenvolvedor](https://github.com/linkParaPerfil)
-* **Fulano De Tal** - *Documentação* - [fulanodetal](https://github.com/linkParaPerfil)
+* **José Augusto Ribeiro** - *Trabalho Inicial* - [Jose Augusto Ribeiro](https://github.com/ribeiry)
 
-Você também pode ver a lista de todos os [colaboradores](https://github.com/usuario/projeto/colaboradores) que participaram deste projeto.
 
-## 📄 Licença
-
-Este projeto está sob a licença (sua licença) - veja o arquivo [LICENSE.md](https://github.com/usuario/projeto/licenca) para detalhes.
 
 ## 🎁 Expressões de gratidão
 
@@ -95,7 +76,3 @@ Este projeto está sob a licença (sua licença) - veja o arquivo [LICENSE.md](h
 
 ---
 ⌨️ com ❤️ por [José Augusto ](https://github.com/ribeiry)
-=======
-# OrderServices
-A Service Order 
->>>>>>> 1f4e51b (Create README.md)
