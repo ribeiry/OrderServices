@@ -13,24 +13,6 @@ Consulte **[Implantação](#-implanta%C3%A7%C3%A3o)** para saber como implantar 
 Para executar é necessário ter o Maven instalado eo java jdk 17 tambem configurado em sua maquina.
 
 
-### 🔧 Instalação
-
-Uma série de exemplos passo-a-passo que informam o que você deve executar para ter um ambiente de desenvolvimento em execução.
-
-Diga como essa etapa será:
-
-```
-Dar exemplos
-```
-
-E repita:
-
-```
-Até finalizar
-```
-
-Termine com um exemplo de como obter dados do sistema ou como usá-los para uma pequena demonstração.
-
 ## ⚙️ Executando os testes
 
 Explicar como executar os testes automatizados para este sistema. Para isso você deve executar o seguinte comando
