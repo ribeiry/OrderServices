@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Order Services 
 
 Um servico desenvolvido em java 17 com SpringBoot 3.1.3 e com Database H2.
@@ -94,3 +95,7 @@ Este projeto está sob a licença (sua licença) - veja o arquivo [LICENSE.md](h
 
 ---
 ⌨️ com ❤️ por [José Augusto ](https://github.com/ribeiry)
+=======
+# OrderServices
+A Service Order 
+>>>>>>> 1f4e51b (Create README.md)
