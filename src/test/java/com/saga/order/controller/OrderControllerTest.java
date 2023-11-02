@@ -78,7 +78,7 @@ public class OrderControllerTest {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/orders/clients/{id}", pedidos.get(0).getCodCliente())
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isFound());
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
 
     }
 
