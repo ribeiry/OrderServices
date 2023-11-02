@@ -41,7 +41,7 @@ public class OrderController {
     @ApiResponse(responseCode = "404", description = "Nao ha nenhum pedido ")
     public ResponseEntity<List<OrderDTO>> findAllOrder(){
        List<OrderDTO> order = orderServices.findAll();
-       if(order== null){
+       if(order == null || order.isEmpty() ){
            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
        }
        else {
@@ -53,23 +53,45 @@ public class OrderController {
     @Operation(summary = "Lista o pedido de acordo com o ID informado")
     @ApiResponse(responseCode =  "302", description = "Pedido encontrado")
     @ApiResponse(responseCode = "404", description = "Pedido com ID nao encontrado")
-    public  ResponseEntity<OrderDTO> findaOrder(@PathVariable UUID id) throws OrderNotFoundException {
-         OrderDTO orders = orderServices.findOne(id) ;
-         if ( orders == null) {
+    public  ResponseEntity<OrderDTO> findaOrder(@PathVariable UUID id) throws Exception {
+        OrderDTO order = null;
+        try{
+            order = orderServices.findOne(id) ;
+            if ( order == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(order);
+            }
+            return ResponseEntity.status(HttpStatus.FOUND).body(order);
+        }
+        catch (OrderNotFoundException e){
             throw new OrderNotFoundException("id:" + id);
-         }
-         return ResponseEntity.status(HttpStatus.FOUND).body(orders);
+        }
+        catch (Exception e){
+            if("No value present".equalsIgnoreCase(e.getMessage())){
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(order);
+            }
+            throw  new Exception(e);
+        }
     }
     @GetMapping(value = "/clients/{codCliente}",consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE} )
     @Operation(summary = "Lista o pedido de acordo com o ID de cliente informado")
     @ApiResponse(responseCode =  "302", description = "Pedido encontrado")
     @ApiResponse(responseCode = "404", description = "Pedido com ID nao encontrado")
-    public ResponseEntity<List<OrderDTO>> findaOrderaClient(@PathVariable UUID codCliente) throws OrderNotFoundException {
-        List<OrderDTO> orders = orderServices.findbyClient(codCliente);
-        if ( orders == null) {
-            throw new OrderNotFoundException("id:" + codCliente);
+    public ResponseEntity<List<OrderDTO>> findaOrderaClient(@PathVariable UUID codCliente) throws Exception {
+        List<OrderDTO> orders = null;
+        try {
+           orders = orderServices.findbyClient(codCliente);
+           if(orders.size() == 0 && orders.isEmpty()){
+               return ResponseEntity.status(HttpStatus.NOT_FOUND).body(orders);
+           }
+            return ResponseEntity.status(HttpStatus.FOUND).body(orders);
+
+       }
+        catch (Exception e){
+            if("No value present".equalsIgnoreCase(e.getMessage())){
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(orders);
+            }
+            throw  new Exception(e);
         }
-        return ResponseEntity.status(HttpStatus.FOUND).body(orders);
     }
 
     @PutMapping(value = "/{codPedido}" ,consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -77,11 +99,17 @@ public class OrderController {
     @ApiResponse(responseCode =  "200", description = "Pedido encontrado")
     @ApiResponse(responseCode = "404", description = "Pedido com ID nao encontrado")
     public  ResponseEntity<OrderDTO> cancelOrder(@PathVariable UUID codPedido) throws OrderNotFoundException {
-        OrderDTO orders = orderServices.CancelbyID(codPedido);
-        if ( orders == null) {
+        OrderDTO orders = null;
+        try{
+            orders = orderServices.CancelbyID(codPedido);
+            if ( orders == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(orders);
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(orders);
+        }
+        catch (OrderNotFoundException e){
             throw new OrderNotFoundException("id:" + codPedido);
         }
-        return ResponseEntity.status(HttpStatus.OK).body(orders);
     }
 
 }
