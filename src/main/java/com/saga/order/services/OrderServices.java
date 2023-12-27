@@ -5,6 +5,7 @@ import com.saga.order.model.OrderDTO;
 import com.saga.order.model.OrderMapper;
 import com.saga.order.model.ProdutoDTO;
 import jakarta.transaction.Transactional;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +56,7 @@ public class OrderServices {
          valorTotal += pedidoController.getProdutos().get(i).getPreco();
         }
         pedidoController.setCodCliente(UUID.randomUUID());
+        pedidoController.setCodPedido(UUID.randomUUID());
         pedidoController.setTotalPreco(valorTotal);
         repository.save(pedidoController);
     }

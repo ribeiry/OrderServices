@@ -42,7 +42,7 @@ public class OrderController {
     public ResponseEntity<List<OrderDTO>> findAllOrder(){
        List<OrderDTO> order = orderServices.findAll();
        if(order == null || order.isEmpty() ){
-           return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+               return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
        }
        else {
           return ResponseEntity.status(HttpStatus.FOUND).body(order);
