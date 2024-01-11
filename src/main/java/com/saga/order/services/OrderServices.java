@@ -46,7 +46,7 @@ public class OrderServices {
     }
 
 
-    public void save(OrderDTO pedidoController){
+    public UUID save(OrderDTO pedidoController){
         logger.info("SAVING ORDER: " + pedidoController);
         ProdutoDTO produto = new ProdutoDTO();
         float  valorTotal = 0;
@@ -59,5 +59,6 @@ public class OrderServices {
         pedidoController.setCodPedido(UUID.randomUUID());
         pedidoController.setTotalPreco(valorTotal);
         repository.save(pedidoController);
+        return pedidoController.getCodPedido();
     }
 }

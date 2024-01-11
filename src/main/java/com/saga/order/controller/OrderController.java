@@ -29,9 +29,10 @@ public class OrderController {
     @Operation(summary = "Cria um pedido")
     @ApiResponse(responseCode = "201", description = "Pedido Criado")
     @ApiResponse(responseCode = "500", description = "Erro interno")
-    public ResponseEntity<OrderDTO> createOrder(@Valid @RequestBody OrderDTO pedido){
-       orderServices.save(pedido);
-       return  ResponseEntity.status(HttpStatus.CREATED).body(null);
+    public ResponseEntity<UUID> createOrder(@Valid @RequestBody OrderDTO pedido){
+       UUID codOrder = orderServices.save(pedido);
+
+       return  ResponseEntity.status(HttpStatus.CREATED).body(codOrder);
     }
 
 

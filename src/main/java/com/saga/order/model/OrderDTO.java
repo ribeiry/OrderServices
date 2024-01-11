@@ -12,7 +12,6 @@ import jakarta.persistence.*;
 public class OrderDTO implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID codPedido;
 
     public OrderDTO() {
