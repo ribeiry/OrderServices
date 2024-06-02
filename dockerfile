@@ -5,6 +5,8 @@ FROM eclipse-temurin:17-jdk-jammy AS ORDERSERVICE
 # Diretório de trabalho no contêiner
 WORKDIR /app
 
+ENV JAVA_OPTS = "-Xmx2G -Xms512m -XX:+UseCGroupMemoryLimitForHeap+UseG1GC"
+
 # Copie o arquivo JAR do seu aplicativo para o contêiner
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./

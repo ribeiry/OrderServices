@@ -34,22 +34,22 @@ public class OrderMapper {
 
         List<OrderDTO> PedidoList = new ArrayList<>();
 
-        for (int x = 0 ; x < orderDTOList.size(); x ++) {
+        for (OrderDTO orderDTO : orderDTOList) {
 
             OrderDTO orderMapper = new OrderDTO();
             List<ProdutoDTO> produtoMapper = new ArrayList<>();
 
-            orderMapper.setCodPedido(orderDTOList.get(x).getCodPedido());
-            orderMapper.setCodCliente(orderDTOList.get(x).getCodCliente());
-            orderMapper.setStatusPedido(orderDTOList.get(x).getStatusPedido());
-            orderMapper.setTotalPreco(orderDTOList.get(x).getTotalPreco());
+            orderMapper.setCodPedido(orderDTO.getCodPedido());
+            orderMapper.setCodCliente(orderDTO.getCodCliente());
+            orderMapper.setStatusPedido(orderDTO.getStatusPedido());
+            orderMapper.setTotalPreco(orderDTO.getTotalPreco());
 
-            for (int i = 0; i < orderDTOList.get(x).getProdutos().size(); i++) {
+            for (int i = 0; i < orderDTO.getProdutos().size(); i++) {
                 ProdutoDTO prod = new ProdutoDTO();
-                prod.setCodProduto(orderDTOList.get(x).getProdutos().get(i).getCodProduto());
-                prod.setDescProduto(orderDTOList.get(x).getProdutos().get(i).getDescProduto());
-                prod.setPreco(orderDTOList.get(x).getProdutos().get(i).getPreco());
-                prod.setQuantidade(orderDTOList.get(x).getProdutos().get(i).getQuantidade());
+                prod.setCodProduto(orderDTO.getProdutos().get(i).getCodProduto());
+                prod.setDescProduto(orderDTO.getProdutos().get(i).getDescProduto());
+                prod.setPreco(orderDTO.getProdutos().get(i).getPreco());
+                prod.setQuantidade(orderDTO.getProdutos().get(i).getQuantidade());
 
                 produtoMapper.add(prod);
             }

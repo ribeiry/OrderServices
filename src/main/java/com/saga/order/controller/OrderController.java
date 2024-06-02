@@ -16,17 +16,18 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
+import static com.saga.order.constant.Constant.*;
+
 @RestController
-@RequestMapping("/orders")
+@RequestMapping(URL_PATH)
 public class OrderController {
 
     @Autowired
-    private OrderServices orderServices;
-
+    OrderServices orderServices;
 
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
-    @Operation(summary = "Cria um pedido")
+    @Operation(summary = MSG_SWAGGER_CREATE)
     @ApiResponse(responseCode = "201", description = "Pedido Criado")
     @ApiResponse(responseCode = "500", description = "Erro interno")
     public ResponseEntity<UUID> createOrder(@Valid @RequestBody OrderDTO pedido){
@@ -37,9 +38,9 @@ public class OrderController {
 
 
     @GetMapping(value = "/", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    @Operation(summary = "Lista todos os pedido")
-    @ApiResponse(responseCode = "302", description = "Encontrado Pedido")
-    @ApiResponse(responseCode = "404", description = "Nao ha nenhum pedido ")
+    @Operation(summary = MSG_SWAGGER_LIST_ALL)
+    @ApiResponse(responseCode = CODE_RETURN_SWAGGER_FOUND, description = "Encontrado Pedido")
+    @ApiResponse(responseCode = CODE_RETURN_SWAGGER_NOT_FOUND, description = "Nao ha nenhum pedido ")
     public ResponseEntity<List<OrderDTO>> findAllOrder(){
        List<OrderDTO> order = orderServices.findAll();
        if(order == null || order.isEmpty() ){
@@ -51,15 +52,15 @@ public class OrderController {
     }
 
     @GetMapping(value = "/{id}",consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE} )
-    @Operation(summary = "Lista o pedido de acordo com o ID informado")
-    @ApiResponse(responseCode =  "302", description = "Pedido encontrado")
-    @ApiResponse(responseCode = "404", description = "Pedido com ID nao encontrado")
+    @Operation(summary = MSG_SWAGGER_LIST_A_ORDER)
+    @ApiResponse(responseCode =  CODE_RETURN_SWAGGER_FOUND, description = "Pedido encontrado")
+    @ApiResponse(responseCode = CODE_RETURN_SWAGGER_NOT_FOUND, description = "Pedido com ID nao encontrado")
     public  ResponseEntity<OrderDTO> findaOrder(@PathVariable UUID id) throws Exception {
         OrderDTO order = null;
         try{
             order = orderServices.findOne(id) ;
             if ( order == null) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(order);
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
             }
             return ResponseEntity.status(HttpStatus.FOUND).body(order);
         }
@@ -67,21 +68,19 @@ public class OrderController {
             throw new OrderNotFoundException("id:" + id);
         }
         catch (Exception e){
-            if("No value present".equalsIgnoreCase(e.getMessage())){
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(order);
-            }
-            throw  new Exception(e);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
-    @GetMapping(value = "/clients/{codCliente}",consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE} )
-    @Operation(summary = "Lista o pedido de acordo com o ID de cliente informado")
-    @ApiResponse(responseCode =  "302", description = "Pedido encontrado")
-    @ApiResponse(responseCode = "404", description = "Pedido com ID nao encontrado")
+    @GetMapping(value = URL_PATH_CLIENTS + "/{codCliente}",consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE} )
+    @Operation(summary = MSG_SWAGGER_LIST_BY_ID_C)
+    @ApiResponse(responseCode =  CODE_RETURN_SWAGGER_FOUND, description = "Pedido encontrado")
+    @ApiResponse(responseCode = CODE_RETURN_SWAGGER_NOT_FOUND, description = "Pedido com ID nao encontrado")
     public ResponseEntity<List<OrderDTO>> findaOrderaClient(@PathVariable UUID codCliente) throws Exception {
         List<OrderDTO> orders = null;
         try {
-           orders = orderServices.findbyClient(codCliente);
-           if(orders.size() == 0 && orders.isEmpty()){
+
+            orders = orderServices.findbyClient(codCliente);
+           if(orders.isEmpty()){
                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(orders);
            }
             return ResponseEntity.status(HttpStatus.FOUND).body(orders);
@@ -96,15 +95,15 @@ public class OrderController {
     }
 
     @PutMapping(value = "/{codPedido}" ,consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    @Operation(summary = "Cancela o pedido de acordo com o ID de pedido informado")
-    @ApiResponse(responseCode =  "200", description = "Pedido encontrado")
-    @ApiResponse(responseCode = "404", description = "Pedido com ID nao encontrado")
+    @Operation(summary = MSG_SWAGGER_CANCEL_ORDER)
+    @ApiResponse(responseCode =  CODE_RETURN_SWAGGER_SUCCESS, description = "Pedido encontrado")
+    @ApiResponse(responseCode = CODE_RETURN_SWAGGER_NOT_FOUND, description = "Pedido com ID nao encontrado")
     public  ResponseEntity<OrderDTO> cancelOrder(@PathVariable UUID codPedido) throws OrderNotFoundException {
-        OrderDTO orders = null;
+        OrderDTO orders;
         try{
             orders = orderServices.CancelbyID(codPedido);
             if ( orders == null) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(orders);
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
             }
             return ResponseEntity.status(HttpStatus.OK).body(orders);
         }
