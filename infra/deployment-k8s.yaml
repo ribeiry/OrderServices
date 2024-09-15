@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orderservices
+  namespace: order
+  labels:
+    app: application
+spec:
+  selector:
+    matchLabels:
+      app: application
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: application
+    spec:
+      containers:
+      - name: orderservice
+        image: docker.io/library/orderservices:latest
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - name: log
+          mountPath: /logs
+        ports:
+        - containerPort: 8081
+          protocol: TCP
+      volumes:
+      - name: log
+        emptyDir: {}
