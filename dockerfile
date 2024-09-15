@@ -8,12 +8,13 @@ WORKDIR /app
 ENV JAVA_OPTS = "-Xmx2G -Xms512m -XX:+UseCGroupMemoryLimitForHeap+UseG1GC"
 
 # Copie o arquivo JAR do seu aplicativo para o contêiner
-COPY .mvn/ .mvn
-COPY mvnw pom.xml ./
+COPY /app/.mvn/ .mvn
+COPY /app/mvnw ./
+COPY /app/pom.xml ./
 
 RUN ./mvnw dependency:resolve
 
-COPY src ./src
+COPY ./app/src ./app/src
 
 EXPOSE 8081
 
