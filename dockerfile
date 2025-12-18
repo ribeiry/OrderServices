@@ -18,5 +18,7 @@ COPY ./app/src ./app/src
 
 EXPOSE 8081
 
+WORKDIR /app/src
+
 # Comando para executar o aplicativo Java (substitua com sua classe principal)
 CMD ["./mvnw", "spring-boot:run"]

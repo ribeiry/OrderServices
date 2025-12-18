@@ -76,6 +76,7 @@ public class OrderServices {
         logger.error("Returning fallBackResponse");
         List<OrderDTO> order = new ArrayList<>();
         return order;
+
     }
 
     public OrderDTO fallbackUnique(UUID codPedido, Throwable e){

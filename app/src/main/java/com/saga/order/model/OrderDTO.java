@@ -18,12 +18,11 @@ public class OrderDTO implements Serializable {
         // TODO document why this constructor is empty
     }
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  UUID codCliente;
     //TODO CODCLIENTE NOT GENERATED
 
     @OneToMany(mappedBy = "OrderDTO" , cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("produtos")
     private List<ProdutoDTO> produtos;
 
     @Column
