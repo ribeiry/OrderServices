@@ -24,6 +24,6 @@ public class OrderAIController {
     @ApiResponse(responseCode = "200", description = "GEMMA3 Endpoint")
     public ResponseEntity<String> creatConversation(){
 
-        return  ResponseEntity.status(HttpStatus.OK).body(orderServicesGemma.query());
+        return  ResponseEntity.status(HttpStatus.OK).body(orderServicesGemma.callGemma());
     }
 }

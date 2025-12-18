@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.saga.order.configuration.AiConversationMemory;
 import com.saga.order.model.OrderDTO;
+import com.saga.order.utils.HttpConnections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,25 +33,20 @@ public class OrderServicesGemma {
 
     @Autowired
     private OrderServices orderServices;
-    private static String url =  "http://localhost:11434/api/generate";
+
     private static String responseStatic = "response";
     private AiConversationMemory memory = new AiConversationMemory(10);
     private List<OrderDTO> order = new ArrayList<>();
-
+    private HttpConnections connectionGemma3 = new HttpConnections();
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-
-    public String query(){
+    public String callGemma() {
 
         order = orderServices.findAll();
-        RestTemplate restTemplate = new RestTemplate();
-
-        RequestCallback requestCallback = restTemplate.httpEntityCallback(new HttpEntity<>(buildBody(), buildHeaders()));
-        ResponseExtractor<String> responseExtractor = readResponse();
-
-        return restTemplate.execute(url, HttpMethod.POST, requestCallback, responseExtractor);
+        return connectionGemma3.queryGemma3(buildBody(), buildHeaders(), readResponse());
     }
+
 
     private ResponseExtractor<String> readResponse (){
         AtomicReference<StringBuilder> fullResponse = new AtomicReference<>(new StringBuilder());
