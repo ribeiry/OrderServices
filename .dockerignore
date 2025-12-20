@@ -1,0 +1,12 @@
+# Arquivos de compilação do Maven
+#target/
+
+# Arquivos de configuração do IDE (por exemplo, IntelliJ IDEA)
+.idea/
+
+# Arquivos temporários
+*.swp
+*~
+
+# Logs e arquivos de saída
+*.log
